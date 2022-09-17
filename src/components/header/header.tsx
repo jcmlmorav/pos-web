@@ -1,14 +1,14 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { Search, SearchIconWrapper, StyledInputBase } from './header.styles';
+import React, { ReactElement } from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import { Search, SearchIconWrapper, StyledInputBase } from './header.styles'
 
-function Header() {
+function Header (): ReactElement {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar>
@@ -25,13 +25,13 @@ function Header() {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
         </Toolbar>
       </AppBar>
     </Box>
-  );
+  )
 }
 
-export default Header;
+export default Header

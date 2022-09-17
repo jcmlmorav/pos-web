@@ -1,19 +1,19 @@
-import React from 'react';
-import Header from '../../components/header';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React, { ReactElement } from 'react'
+import Header from '../../components/header'
+import Box from '@mui/material/Box'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
 
-type Props = {
-  data: Record<string, string | number | boolean>[]
-};
+interface Props {
+  data: Array<Record<string, string | number | boolean>>
+}
 
-function Inventory({ data }: Props) {
+function Inventory ({ data }: Props): ReactElement {
   return (
     <>
       <Header />
@@ -41,7 +41,7 @@ function Inventory({ data }: Props) {
                     {product.name}
                   </TableCell>
                   <TableCell align="right">{product.inventory}</TableCell>
-                  <TableCell align="right">{product.available ? 'Disponible' : 'Agotado'}</TableCell>
+                  <TableCell align="right">{product.available === true ? 'Disponible' : 'Agotado'}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -49,7 +49,7 @@ function Inventory({ data }: Props) {
         </TableContainer>
       </Box>
     </>
-  );
+  )
 }
 
-export default Inventory;
+export default Inventory
