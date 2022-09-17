@@ -9,22 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(
-  id: string,
-  name: string,
-  quantity: number,
-  available: boolean
-) {
-  return { id, name, quantity, available };
-}
+type Props = {
+  data: Record<string, string | number | boolean>[]
+};
 
-const rows = [
-  createData('1', 'Papa', 15, true),
-  createData('2', 'Platano', 200, true),
-  createData('3', 'Yuca', 62, false)
-];
-
-function Inventory() {
+function Inventory({ data }: Props) {
   return (
     <>
       <Header />
@@ -40,19 +29,19 @@ function Inventory() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {data.map((product) => (
                 <TableRow
-                  key={row.name}
+                  key={product.id as string}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.id}
+                    {product.code}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {product.name}
                   </TableCell>
-                  <TableCell align="right">{row.quantity}</TableCell>
-                  <TableCell align="right">{row.available ? 'Disponible' : 'Agotado'}</TableCell>
+                  <TableCell align="right">{product.inventory}</TableCell>
+                  <TableCell align="right">{product.available ? 'Disponible' : 'Agotado'}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
