@@ -1,2 +1,2 @@
-import Inventory from './inventory'
+import Inventory from './Inventory'
 export default Inventory
