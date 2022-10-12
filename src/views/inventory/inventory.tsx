@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import WithLayout from '../../layout/WithLayout'
 import { useQuery } from '@apollo/client'
 import { GET_PRODUCTS } from '../../queries/product'
+import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import Alert from '@mui/material/Alert'
@@ -12,13 +13,20 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider'
+import ButtonGroup from '@mui/material/ButtonGroup'
+import Button from '@mui/material/Button'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EyeIcon from '@mui/icons-material/RemoveRedEye'
 
 const Inventory = (): ReactElement => {
   const { loading, error, data } = useQuery(GET_PRODUCTS)
 
   if (loading) {
     return (
-      <Box style={{ display: 'flex', justifyContent: 'center', padding: '2em' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <CircularProgress />
       </Box>
     )
@@ -31,39 +39,63 @@ const Inventory = (): ReactElement => {
   }
 
   return (
-    <>
-      <Box sx={{ pt: 9 }}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
+    <Box gap={2} display="flex" justifyContent="center" flexDirection="column">
+      <Typography variant="h6" component="h2">Listado de poductos</Typography>
+      <Divider />
+      <Typography variant="subtitle1" align='right'>
+        <Link to="/inventario/registrar">Registrar producto</Link>
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Código</TableCell>
+              <TableCell>Producto</TableCell>
+              <TableCell align="right">Cantidad</TableCell>
+              <TableCell align="right">Estado</TableCell>
+              <TableCell align="right">Acciones</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {(data.products.length === 0) && (
               <TableRow>
-                <TableCell>Código</TableCell>
-                <TableCell>Producto</TableCell>
-                <TableCell align="right">Cantidad</TableCell>
-                <TableCell align="right">Estado</TableCell>
+                <TableCell component="th" scope="row" colSpan={4}>
+                  <Typography variant="subtitle2" align="center">No hay productos registrados</Typography>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.products.map((product: Record<string, any>) => (
-                <TableRow
-                  key={product.id as string}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {product.code}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {product.name}
-                  </TableCell>
-                  <TableCell align="right">{product.inventory}</TableCell>
-                  <TableCell align="right">{product.available === true ? 'Disponible' : 'Agotado'}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-    </>
+            )}
+            {data.products.map((product: Record<string, any>) => (
+              <TableRow
+                key={product.id as string}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {product.code}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {product.name}
+                </TableCell>
+                <TableCell align="right">{product.inventory}</TableCell>
+                <TableCell align="right">{product.available === true ? 'Disponible' : 'Agotado'}</TableCell>
+                <TableCell align="right">
+                  <ButtonGroup>
+                    <Button aria-label="Ver producto">
+                      <EyeIcon />
+                    </Button>
+                    <Button aria-label="Editar producto">
+                      <EditIcon />
+                    </Button>
+                    <Button aria-label="Eliminar producto">
+                      <DeleteIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   )
 }
 

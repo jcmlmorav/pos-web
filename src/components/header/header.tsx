@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import { Search, SearchIconWrapper, StyledInputBase } from './header.styles'
+import { Search, SearchIconWrapper, StyledInputBase } from './Header.styles'
 
 function Header (): ReactElement {
   return (
