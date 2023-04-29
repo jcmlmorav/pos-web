@@ -1,7 +1,6 @@
 import React, { ReactElement, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { useNavigate } from 'react-router-dom'
-import WithLayout from '../../layout/WithLayout'
+import { useNavigate, Link } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import TextField from '@mui/material/TextField'
@@ -51,6 +50,9 @@ const InventoryNew = (): ReactElement => {
     <>
       <Typography variant="h6" component="h2">Registro de productos</Typography>
       <Divider />
+      <Typography variant="subtitle1" align='left'>
+        <Link to="/">Ir atrás</Link>
+      </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display="flex" flexDirection="column" gap={2}>
           <TextField
@@ -97,4 +99,4 @@ const InventoryNew = (): ReactElement => {
   )
 }
 
-export default WithLayout(InventoryNew)
+export default InventoryNew
